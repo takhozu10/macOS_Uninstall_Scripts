@@ -13,12 +13,22 @@ if [ $VSCode -gt 1 ]
         killall Electron
         echo "Terminating Visual Studio Code app"
         sleep 3
-        ### Remove VS Code app goes here.
+        rm -rf /Applications/Visual\ Studio\ Code.app
+        rm -rf ~/Library/Caches/com.microsoft.VSCode
+        rm -rf ~/Library/Caches/com.microsoft.VSCode.ShipIt
+        rm -rf ~/Library/Preferences/com.microsoft.VSCode.helper.plist
+        rm -rf ~/Library/Preferences/com.microsoft.VSCode.plist
+        rm -rf ~/Library/Saved\ Application\ State/com.microsoft.VSCode.savedState
         echo "Uninstall Completed"
     else
         echo "The Visual Studio Code app is not running on the computer"
         #Uninstall Visual Studio Code and its configuration files.
-        ### Remove VS Code app goes here.
+        rm -rf /Applications/Visual\ Studio\ Code.app
+        rm -rf ~/Library/Caches/com.microsoft.VSCode
+        rm -rf ~/Library/Caches/com.microsoft.VSCode.ShipIt
+        rm -rf ~/Library/Preferences/com.microsoft.VSCode.helper.plist
+        rm -rf ~/Library/Preferences/com.microsoft.VSCode.plist
+        rm -rf ~/Library/Saved\ Application\ State/com.microsoft.VSCode.savedState
         echo "Uninstall Completed"
     fi
 exit 0; #Exit
