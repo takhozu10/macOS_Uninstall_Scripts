@@ -10,7 +10,8 @@ if [ $VSCode -gt 1 ]
     then
         echo "The Visual Studio Code app is currently running on the computer"
         #Terminate Visual Studio Code app and uninstall Visual Studio Code and its configuration files.
-        killall Electron
+        visualps=$(ps aux | grep 'Visual Studio Code.app/Contents/MacOS/Electron' | grep -v grep | awk '{print $2}')
+        kill $visualps
         echo "Terminating Visual Studio Code app"
         sleep 3
         rm -rf /Applications/Visual\ Studio\ Code.app
