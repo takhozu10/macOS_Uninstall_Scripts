@@ -5,42 +5,75 @@
 #Big Lots, Inc.
 #Uninstall IBM Notes.
 
-notes=$(ps aux | grep 'IBM Notes' -c)
-if [ test -d /Applications/Lotus Notes.app ]
+if [ -d /Applications/Lotus\ Notes.app ]
+then
+    lotusnotes=$(ps aux | grep 'Lotus Notes' -c)
+    echo "Lotus Notes version 8 is installed on this computer"
+    #Identify the version 8 of Lotus Notes is installed on this computer.
+    if [ $lotusnotes -gt 1 ]
     then
-        lotusnotes=$(ps aux | grep 'Lotus Notes' -c)
-        if [ $lotusnotes -gt 1 ]
-            then
-            echo "Lotus Notes version 8 is installed on this computer"
-            #Identified that the older verison of Lotus Notes is installed on this computer.
-            lotusnotesps=$(ps aux | grep 'Lotus Notes' | grep -v grep | awk '{print $2}')
-            kill $lotusnotes
-            echo "Terminating Lotus Notes app"
-            sleep 3
-            rm -rfv /Applications/Lotus\ Notes.app
-            rm -rfv /Applications/Lotus\ Application\ Support
-            rm -rfv ~/Library/Application\ Support/Lotus\ Notes\ Data
-            rm -rfv ~/Library/Preferences/Notes\ Preferences
-            rm -rfv /Library/Receipts/Lotus\ Notes\ Installer_English.pkg
-            rm -rfv /Library/Receipts/Lotus\ Notes\ Installer.pkg
-            rm -rfv /Library/Receipts/xpdcoreinstaller.pkg
-
-if [ $notes -gt 1 ]
-    then
-        echo "IBM Notes app is currently running on the computer"
-        #Terminate IBM Notes app and uninstall IBM Notes and its configuration files.
-        ibmnotes=$(ps aux | grep 'IBM Notes' | grep -v grep | awk '{print $2}')
-        kill $ibmnotes
-        echo "Terminating IBM notes app"
+        # Kill Lotus Notes version 8 and remove Lotus Notes.
+        echo "Lotus Notes version 8 is currently running on this computer"
+        lotusnotesps=$(ps aux | grep 'Lotus Notes' | grep -v grep | awk '{print $2}')
+        kill $lotusnotesps
+        echo "Terminating Lotus Notes app"
         sleep 3
-        rm -rfv /Applications/IBM\ Notes.app
-        rm -rfv ~/Library/Application\ Support/IBM\ Notes\ Data
-        rm -rfv ~/Library/Preferences/Notes\ Preferences
-        echo "Uninstall Completed"
+        echo "Removing Lotus Notes app"
+        rm -rf /Applications/Lotus\ Notes.app
+        rm -rf /Applications/Lotus\ Application\ Support
+        rm -rf ~/Library/Application\ Support/Lotus\ Notes\ Data
+        rm -rf ~/Library/Preferences/Notes\ Preferences
+        rm -rf /Library/Receipts/Lotus\ Notes\ Installer_English.pkg
+        rm -rf /Library/Receipts/Lotus\ Notes\ Installer.pkg
+        rm -rf /Library/Receipts/xpdcoreinstaller.pkg
+        echo "Uninstall Completed!"
     else
-        echo "The Visual Studio Code app is not running on the computer"
-        #Uninstall IBM Notes and its configuration files.
-        
-        echo "Uninstall Completed"
+        echo "Removing Lotus Notes app"
+        rm -rf /Applications/Lotus\ Notes.app
+        rm -rf /Applications/Lotus\ Application\ Support
+        rm -rf ~/Library/Application\ Support/Lotus\ Notes\ Data
+        rm -rf ~/Library/Preferences/Notes\ Preferences
+        rm -rf /Library/Receipts/Lotus\ Notes\ Installer_English.pkg
+        rm -rf /Library/Receipts/Lotus\ Notes\ Installer.pkg
+        rm -rf /Library/Receipts/xpdcoreinstaller.pkg
+        echo "Uninstall Completed!"
     fi
+    exit 0; #Exit
+elif [ -d /Applications/IBM\ Notes.app ]
+then
+    ibmnotes=$(ps aux | grep 'IBM Notes' -c)
+    echo "IBM Notes version 9 is installed on this computer"
+    #Identify the verison 9 of IBM Notes is installed on this computer.
+    if [ $ibmnotes -gt 1 ]
+    then
+        # Kill IBM Notes version 9 and remove IBM Notes.
+        echo "IBM Notes version 9 is currently running on the computer"
+        ibmnotesps=$(ps aux | grep 'IBM Notes' | grep -v grep | awk '{print $2}')
+        kill $ibmnotesps
+        echo "Terminating IBM Notes app"
+        sleep 3
+        echo "Removing IBM Notes app"
+        rm -rf /Applications/IBM\ Notes.app
+        rm -rf /Applications/IBM\ Application\ Support
+        rm -rf ~/Library/Application\ Support/IBM\ Notes\ Data
+        rm -rf ~/Library/Preferences/Notes\ Preferences
+        rm -rf /Library/Receipts/IBM\ Notes\ Installer.pkg
+        rm -rf /Library/Receipts/IBM\ Notes\ Installer_English.pkg
+        rm -rf /Library/Receipts/xpdcoreinstaller.pkg
+        echo "Uninstall Completed!"
+    else
+        echo "Removing IBM Notes app"
+        rm -rf /Applications/IBM\ Notes.app
+        rm -rf /Applications/IBM\ Application\ Support
+        rm -rf ~/Library/Application\ Support/IBM\ Notes\ Data
+        rm -rf ~/Library/Preferences/Notes\ Preferences
+        rm -rf /Library/Receipts/IBM\ Notes\ Installer.pkg
+        rm -rf /Library/Receipts/IBM\ Notes\ Installer_English.pkg
+        rm -rf /Library/Receipts/xpdcoreinstaller.pkg
+        echo "Uninstall Completed!"        
+    fi
+    exit 0; #Exit
+else
+    echo "IBM Notes or Lotus Notes is not installed on this computer."
+fi
 exit 0; #Exit
