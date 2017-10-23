@@ -35,7 +35,6 @@ then
         rm -rf ~/Library/Preferences/com.jgraph.drawio.desktop.plist
         rm -rf ~/Library/Saved\ Application\ State/com.jgraph.drawio.desktop.savedState
         echo "Uninstall Completed!"
-    else
     fi
     exit 0; #Exit
 else
