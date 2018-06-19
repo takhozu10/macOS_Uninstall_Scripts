@@ -28,8 +28,8 @@
 # Written by: Tak Hozumi : End User Support Engineer : Big Lots Stores, Inc.
 #
 # Created on: Feburary 16, 2018
-# Modified on: Feburary 19, 2018
-# Version: 0.1.1
+# Modified on: March 29, 2018
+# Version: 0.1.2
 # # #
 
 
@@ -45,20 +45,26 @@ then
 fi
 
 # Remove Microsoft Lync Registration DB files if exists.
-mslyncdbs=($(ls /Users/$loggedinuser/Library/Preferences/ByHost/MicrosoftLyncRegistrationDB.*))
-for i in "${mslyncdbs[@]}"
-do
-    echo "Removed $i"
-    #rm -rf $i
-done
+if [[ $(sudo ls -A /Users/$loggedinuser/Library/Preferences/ByHost/ | grep MicrosoftLyncRegistrationDB) ]];
+then
+    mslyncdbs=($(ls /Users/$loggedinuser/Library/Preferences/ByHost/MicrosoftLyncRegistrationDB.*))
+    for i in "${mslyncdbs[@]}"
+    do
+        echo "Removed $i"
+        #rm -rf $i
+    done
+fi
 
 # Remove Microsoft Lync log files if exists. 
-mslynclogs=($(ls /Users/$loggedinuser/Library/Logs/Microsoft-Lync-*))
-for x in "${mslynclogs[@]}"
-do
-    echo "Removed $x"
-    #rm -rf $x
-done
+if [[ $(sudo ls -A /Users/$loggedinuser/Library/Logs | grep Microsoft-Lync) ]];
+then
+    mslynclogs=($(ls /Users/$loggedinuser/Library/Logs/Microsoft-Lync-*))
+    for x in "${mslynclogs[@]}"
+    do
+        echo "Removed $x"
+        #rm -rf $x
+    done
+fi
 
 # Remove Microsoft Lync Data folder if exists. 
 if [ -d /Users/$loggedinuser/Documents/Microsoft\ User\ Data/Microsoft\ Lync\ Data ]
@@ -80,3 +86,5 @@ then
     echo "The file exists at this location /Users/$loggedinuser/Library/Keychains/OC_KeyContainer*"
     #rm -rf /Users/$loggedinuser/Library/Keychains/OC_KeyContainer*
 fi
+
+exit 0 
